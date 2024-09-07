@@ -1,6 +1,7 @@
 resource "aws_subnet" "public_sub1" {
+  for_each = { for idx, cidr in var.public_cidr_blocks : idx => cidr }
   vpc_id     = aws_vpc.pushpa.id
-  cidr_block = var.public_cidr_blocks
+  cidr_block = each.value
 
   tags = {
     Name = element(var.public_subnet_names, each.key)
