@@ -1,39 +1,35 @@
-resource "aws_subnet" "public_sub1" {
-  for_each = { for idx, cidr in var.public_cidr_blocks : idx => cidr }
-  vpc_id     = aws_vpc.pushpa.id
-  cidr_block = each.value
+resource "aws_subnet" "pub_sub1" {
+  vpc_id     = aws_vpc.main.id
+  cidr_block = "10.0.1.0/24"
 
   tags = {
-    Name = element(var.public_subnet_names, each.key)
+    Name = "public_subnet1"
   }
 }
 
-resource "aws_subnet" "public_sub2" {
-  for_each = { for idx, cidr in var.public_cidr_blocks : idx => cidr }
-  vpc_id     = aws_vpc.pushpa.id
-  cidr_block = each.value
+resource "aws_subnet" "pub_sub2" {
+  vpc_id     = aws_vpc.main.id
+  cidr_block = "10.0.2.0/24"
 
   tags = {
-    Name = element(var.public_subnet_names, each.key)
+    Name = "public_subnet2"
   }
 }
 
-resource "aws_subnet" "private_sub1" {
-  for_each = { for idx, cidr in var.private_cidr_blocks : idx => cidr }
-  vpc_id     = aws_vpc.pushpa.id
-  cidr_block = each.value
+resource "aws_subnet" "pri_sub1" {
+  vpc_id     = aws_vpc.main.id
+  cidr_block = "10.0.3.0/24"
 
   tags = {
-    Name = element(var.private_subnet_names, each.key)
+    Name = "private_subnet1"
   }
 }
 
-resource "aws_subnet" "private_sub2" {
-  for_each = { for idx, cidr in var.private_cidr_blocks : idx => cidr }
-  vpc_id     = aws_vpc.pushpa.id
-  cidr_block = each.value
+resource "aws_subnet" "pri_sub2" {
+  vpc_id     = aws_vpc.main.id
+  cidr_block = "10.0.4.0/24"
 
   tags = {
-    Name = element(var.private_subnet_names, each.key)
+    Name = "private_subnet2"
   }
 }
