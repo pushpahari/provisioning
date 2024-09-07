@@ -24,26 +24,16 @@ resource "aws_route_table" "private_rt" {
   }
 }
 
-resource "aws_route_table_association" "a1" {
+resource "aws_route_table_association" "public" {
   for_each = { for idx, subnet in aws_subnet.public : idx => subnet }
-  subnet_id      = each.value.id
-  route_table_id = aws_route_table.public_rt.id
-}
 
-resource "aws_route_table_association" "a2" {
-  for_each = { for idx, subnet in aws_subnet.public : idx => subnet }
-  subnet_id      = each.value.id
-  route_table_id = aws_route_table.public_rt.id
-}
-
-resource "aws_route_table_association" "a3" {
-  for_each = { for idx, subnet in aws_subnet.private : idx => subnet }
   subnet_id      = each.value.id
   route_table_id = aws_route_table.private_rt.id
 }
 
-resource "aws_route_table_association" "a4" {
+resource "aws_route_table_association" "private" {
   for_each = { for idx, subnet in aws_subnet.private : idx => subnet }
+
   subnet_id      = each.value.id
   route_table_id = aws_route_table.private_rt.id
 }
