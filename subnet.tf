@@ -1,35 +1,35 @@
 resource "aws_subnet" "public_sub1" {
   vpc_id     = aws_vpc.pushpa.id
-  cidr_block = "10.0.1.0/24"
+  cidr_block = var.public_cidr_blocks
 
   tags = {
-    Name = "public1"
+    Name = element(var.public_subnet_names, each.key)
   }
 }
 
 resource "aws_subnet" "public_sub2" {
   vpc_id     = aws_vpc.pushpa.id
-  cidr_block = "10.0.2.0/24"
+  cidr_block = var.public_cidr_blocks
 
   tags = {
-    Name = "public2"
+    Name = element(var.public_subnet_names, each.key)
   }
 }
 
 resource "aws_subnet" "private_sub1" {
   vpc_id     = aws_vpc.pushpa.id
-  cidr_block = "10.0.3.0/24"
+  cidr_block = var.private_cidr_blocks
 
   tags = {
-    Name = "private1"
+    Name = element(var.private_subnet_names, each.key)
   }
 }
 
 resource "aws_subnet" "private_sub2" {
   vpc_id     = aws_vpc.pushpa.id
-  cidr_block = "10.0.4.0/24"
+  cidr_block = var.private_cidr_blocks
 
   tags = {
-    Name = "private2"
+    Name = element(var.private_subnet_names, each.key)
   }
 }
